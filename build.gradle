@@ -12,3 +12,9 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
 }
+
+
+test {
+  testReportDir = file("${System.env.CIRCLE_ARTIFACTS}")
+  testResultsDir = file("${System.env.CIRCLE_TEST_REPORTS}")
+}
