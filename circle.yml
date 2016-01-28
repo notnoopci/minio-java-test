@@ -9,3 +9,7 @@ dependencies:
     - mkdir /tmp/minio
     - minio --enable-accesslog=true server /tmp/minio: {background: true}
     - sleep 2
+
+test:
+  override:
+    - TERM=dumb gradle test -i
