@@ -4,9 +4,8 @@ machine:
 
 dependencies:
   pre:
-    - curl -o ~/bin/minio https://dl.minio.io/server/minio/release/linux-amd64/minio
-    - chmod +x ~/bin/minio
+    - GO15VENDOREXPERIMENT=1 go get -u github.com/minio/minio
     - mkdir ~/.minio && cp ./minio-config.json ~/.minio/config.json
     - mkdir /tmp/minio
-    - ~/bin/minio --enable-accesslog=true server /tmp/minio: {background: true}
+    - minio --enable-accesslog=true server /tmp/minio: {background: true}
     - sleep 2
