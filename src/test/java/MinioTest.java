@@ -13,6 +13,7 @@ import com.amazonaws.ClientConfiguration;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+import org.junit.BeforeClass;
 
 
 public class MinioTest {
@@ -37,6 +38,13 @@ public class MinioTest {
 
   static AmazonS3Client s3Client = minioClient();
   static String TEST_BUCKET = "asdf";
+
+  @BeforeClass
+  public static void createBucket() {
+    try {
+      s3Client.createBucket(TEST_BUCKET);
+    } catch (Exception e) { e.printStackTrace(); /* already created hopefully; move on */ }
+  }
 
   PutObjectResult uploadFile(String key, String content) throws Exception {
     InputStream in = new ByteArrayInputStream(content.getBytes("UTF-8"));
